@@ -9,14 +9,7 @@ ini_set('display_errors',0);
 $urlprox = file_get_contents("https://free-proxy-list.net/");
 preg_match_all("'<tr>(.*?)</tr>'si", $urlprox, $prox);
 
-$exec = exec("ls");
-
-if(strpos($exec, "is not recognized as an internal or external command") == 0){
-    exec("move listip.txt listip-".date('d-m-Y H:i:s').".txt");
-} else {
-    exec("mv listip.txt listip-".date('d-m-Y H:i:s').".txt");
-}
-
+exec("rm -rf listip.txt");
 for ($i=1; $i <= 300; $i++) { 
     $exp = explode("<td>", $prox[0][$i]);
     $ip = explode("</td>", $exp[1]);
